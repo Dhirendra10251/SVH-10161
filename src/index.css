@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --app-font-scale: 1;
+    --text-primary: #0f172a; /* slate-900 */
+    --text-secondary: #334155; /* slate-700 */
+    --text-muted: #475569; /* slate-600 */
+    --text-tertiary: #64748b; /* slate-500 */
+    --border-default: #cbd5e1; /* slate-300 */
+    --border-subtle: #e2e8f0; /* slate-200 */
+    --color-primary: #1d4ed8; /* blue-700 */
+    --color-success: #15803d; /* green-700 */
+    --color-warning: #b45309; /* amber-700 */
+    --color-danger: #b91c1c; /* red-700 */
+    --color-info: #0369a1; /* sky-700 */
+  }
+
+  html {
+    font-size: calc(16px * var(--app-font-scale, 1));
+  }
+
+  .dark {
+    --text-primary: #f8fafc; /* slate-100 */
+    --text-secondary: #cbd5e1; /* slate-300 */
+    --text-muted: #94a3b8; /* slate-400 */
+    --text-tertiary: #64748b; /* slate-500 */
+    --border-default: #334155; /* slate-700 */
+    --border-subtle: #1e293b; /* slate-800 */
+    --color-primary: #f59e0b; /* amber-500 */
+    --color-success: #34d399; /* emerald-400 */
+    --color-warning: #fbbf24; /* amber-400 */
+    --color-danger: #f87171; /* red-400 */
+    --color-info: #38bdf8; /* sky-400 */
+  }
+
+  /* Clear, accessible keyboard focus indicators */
+  :focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+
+  .dark :focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+  }
+
+  /* Enhanced Accessibility Mode: extra prominent outline & focus feedback */
+  body.enhanced-a11y :focus-visible {
+    outline: 3px solid #1d4ed8 !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.25) !important;
+  }
+
+  body.enhanced-a11y.dark :focus-visible {
+    outline: 3px solid #f59e0b !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.3) !important;
+  }
+
+  /* Screen reader only utility class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* Print Styles for UrjaSetu Audit Certificate */
+#urjasetu-audit-certificate-print {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Completely hide all normal UI, navigation, sidebars, headers, and modals */
+  .no-print,
+  #app-sidebar,
+  header,
+  footer,
+  aside,
+  nav,
+  #header-campus-selector,
+  [role="region"][aria-label="Accessibility and Display Controls"],
+  #dashboard-shell,
+  #main-content,
+  [role="dialog"] {
+    display: none !important;
+  }
+
+  /* Hide normal UI from print */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Make only the audit certificate printable */
+  #urjasetu-audit-certificate-print,
+  #urjasetu-audit-certificate-print * {
+    visibility: visible !important;
+  }
+
+  #urjasetu-audit-certificate-print {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    z-index: 999999 !important;
+  }
+
+  /* Prevent awkward page break clipping */
+  table {
+    page-break-inside: auto;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+}
