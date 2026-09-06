@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CampusProfile } from '../types';
 import { CAMPUS_LIST } from '../data/mockData';
+import { ProductExplainerVideo } from './ProductExplainerVideo';
 import {
   ArrowRight,
   Network,
@@ -364,11 +365,20 @@ export const Landing: React.FC<LandingProps> = ({
                 How UrjaSetu Works
               </h2>
               <p className={`text-xs sm:text-sm mt-1 max-w-2xl font-medium ${isDarkMode ? 'text-slate-400' : 'text-slate-700'}`}>
-                Four simple steps that turn scattered college energy assets into an automated microgrid.
+                Watch how UrjaSetu turns scattered campus renewable-energy assets into one coordinated Virtual Power Plant in under one minute.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* EMBEDDED PRODUCT EXPLAINER VIDEO */}
+            <div className="w-full">
+              <ProductExplainerVideo
+                isDarkMode={isDarkMode}
+                onExploreCommandCenter={() => onEnterDashboard()}
+              />
+            </div>
+
+            {/* ARCHITECTURAL 4-STEP BREAKDOWN */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
               {steps.map((step) => {
                 const IconComponent = step.icon;
                 return (
