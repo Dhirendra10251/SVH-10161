@@ -22,6 +22,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     annualCo2ReductionTonnes: 1060, // ~1,060 tonnes/year
     latitude: 26.471,
     longitude: 73.113,
+    imageUrl: '/campuses/iit-jodhpur.jpg',
+    imageProvenance: {
+      imageUrl: '/campuses/iit-jodhpur.jpg',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:IIT_Jodhpur.jpg',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 3.0)',
+      caption: 'IIT Jodhpur Permanent Campus Academic & Administration Complex, Karwar',
+    },
     provenance: {
       solarCapacity: {
         mode: 'LAST_VERIFIED',
@@ -72,6 +79,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     annualCo2ReductionTonnes: 1004,
     latitude: 28.364,
     longitude: 75.588,
+    imageUrl: '/campuses/bits-pilani.jpg',
+    imageProvenance: {
+      imageUrl: '/campuses/bits-pilani.jpg',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:Bits_Clock_tower.jpg',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 3.0)',
+      caption: 'Historic BITS Pilani Clock Tower & Academic Quadrangle, Pilani',
+    },
     provenance: {
       solarCapacity: {
         mode: 'LAST_VERIFIED',
@@ -107,6 +121,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     verificationStatus: 'TENDER_UNCONFIRMED',
     latitude: 26.863,
     longitude: 75.811,
+    imageUrl: '/campuses/mnit-jaipur.jpg',
+    imageProvenance: {
+      imageUrl: '/campuses/mnit-jaipur.jpg',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:Administrative_Building,_MNIT_Jaipur.jpg',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 4.0)',
+      caption: 'Administrative Building & Main Complex, MNIT Jaipur',
+    },
     provenance: {
       solarCapacity: {
         mode: 'UNAVAILABLE',
@@ -141,6 +162,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     annualCo2ReductionTonnes: 162,
     latitude: 26.273,
     longitude: 73.033,
+    imageUrl: '/campuses/mbm-jodhpur.jpg',
+    imageProvenance: {
+      imageUrl: '/campuses/mbm-jodhpur.jpg',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:MBM_Engineering_College,_Jodhpur.jpg',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 4.0)',
+      caption: 'Administrative Block, MBM University (formerly MBM Engineering College), Jodhpur',
+    },
     provenance: {
       solarCapacity: {
         mode: 'LAST_VERIFIED',
@@ -170,6 +198,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     annualCo2ReductionTonnes: 126,
     latitude: 24.592,
     longitude: 73.725,
+    imageUrl: '/campuses/ctae-udaipur.png',
+    imageProvenance: {
+      imageUrl: '/campuses/ctae-udaipur.png',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:College_of_Technology_%26_Engineering,_Udaipur.png',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 3.0)',
+      caption: 'Main Academic Building, College of Technology & Engineering (CTAE), Udaipur',
+    },
     provenance: {
       solarCapacity: {
         mode: 'LAST_VERIFIED',
@@ -199,6 +234,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     annualCo2ReductionTonnes: 153,
     latitude: 28.012,
     longitude: 73.315,
+    imageUrl: '/campuses/ecb-bikaner.jpg',
+    imageProvenance: {
+      imageUrl: '/campuses/ecb-bikaner.jpg',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:ECB_Inside.jpg',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 4.0)',
+      caption: 'Academic Complex, Engineering College Bikaner (ECB)',
+    },
     provenance: {
       solarCapacity: {
         mode: 'LAST_VERIFIED',
@@ -225,6 +267,13 @@ export const CAMPUS_LIST: CampusProfile[] = [
     verificationStatus: 'TELEMETRY_PENDING',
     latitude: 25.143,
     longitude: 75.834,
+    imageUrl: '/campuses/gec-kota.jpg',
+    imageProvenance: {
+      imageUrl: '/campuses/gec-kota.jpg',
+      imageSource: 'https://commons.wikimedia.org/wiki/File:Rajasthan_Technical_University_-_panoramio_(3).jpg',
+      imageSourceName: 'Wikimedia Commons (CC BY-SA 3.0)',
+      caption: 'Government Engineering College Kota / University College of Engineering (UD-RTU Campus)',
+    },
     provenance: {
       solarCapacity: {
         mode: 'LAST_VERIFIED',

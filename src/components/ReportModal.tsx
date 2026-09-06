@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CampusProfile, MetricData, RecommendationItem, SimulatorState } from '../types';
-import { X, Printer, ShieldCheck, Zap, Download, Building2, CheckCircle2 } from 'lucide-react';
+import { X, Printer, ShieldCheck, Zap, Download, Building2, CheckCircle2, Loader2 } from 'lucide-react';
+import { downloadCampusAuditReport } from '../utils/generateAuditPdf';
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -21,10 +22,32 @@ export const ReportModal: React.FC<ReportModalProps> = ({
   simulatorState,
   isDarkMode = false,
 }) => {
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
+
   if (!isOpen) return null;
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownload = async () => {
+    if (isDownloading) return;
+    setIsDownloading(true);
+    setDownloadSuccess(false);
+    try {
+      await downloadCampusAuditReport({
+        campus,
+        metrics,
+        recommendations,
+      });
+      setDownloadSuccess(true);
+      setTimeout(() => setDownloadSuccess(false), 2500);
+    } catch (err) {
+      console.error('Error generating PDF report:', err);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -149,6 +172,37 @@ export const ReportModal: React.FC<ReportModalProps> = ({
 
           <div className="flex items-center gap-2">
             <button
+              onClick={handleDownload}
+              disabled={isDownloading}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+                isDownloading
+                  ? 'opacity-70 cursor-not-allowed bg-slate-700 text-slate-300'
+                  : downloadSuccess
+                  ? 'bg-emerald-600 text-white'
+                  : isDarkMode
+                  ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'
+                  : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
+              }`}
+            >
+              {isDownloading ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Generating report...</span>
+                </>
+              ) : downloadSuccess ? (
+                <>
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Downloaded!</span>
+                </>
+              ) : (
+                <>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download PDF</span>
+                </>
+              )}
+            </button>
+
+            <button
               onClick={handlePrint}
               className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
                 isDarkMode
@@ -157,7 +211,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
               }`}
             >
               <Printer className="w-4 h-4" />
-              <span>Print / Export PDF</span>
+              <span>Print Certificate</span>
             </button>
             <button
               onClick={onClose}

@@ -92,6 +92,13 @@ export interface RecommendationItem {
   dataMode?: DataMode;
 }
 
+export interface CampusImageProvenance {
+  imageUrl: string;
+  imageSource: string;
+  imageSourceName: string;
+  caption: string;
+}
+
 export interface CampusProfile {
   id: string;
   name: string;
@@ -113,6 +120,8 @@ export interface CampusProfile {
   longitude: number;
   provenance: Record<string, ProvenanceInfo>;
   dataNotes?: string;
+  imageUrl?: string;
+  imageProvenance?: CampusImageProvenance;
 }
 
 export interface SimulatorState {

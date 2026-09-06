@@ -27,25 +27,39 @@ interface LandingProps {
 
 const HERO_SLIDES = [
   {
-    name: 'Malaviya National Institute of Technology — Jaipur',
-    code: 'MNIT Jaipur',
-    photoUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=85',
+    name: 'Indian Institute of Technology — Jodhpur',
+    code: 'RJ-VPP-01',
+    photoUrl: '/campuses/iit-jodhpur.jpg',
     overlayGradient: 'from-slate-950 via-slate-950/80 to-slate-900/60',
     campusData: CAMPUS_LIST[0],
   },
   {
-    name: 'MBM University — Jodhpur',
-    code: 'MBM Jodhpur',
-    photoUrl: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=1920&q=85',
+    name: 'Birla Institute of Technology and Science — Pilani',
+    code: 'RJ-VPP-02',
+    photoUrl: '/campuses/bits-pilani.jpg',
     overlayGradient: 'from-slate-950 via-slate-950/85 to-slate-900/65',
     campusData: CAMPUS_LIST[1],
   },
   {
-    name: 'College of Technology & Agricultural Engineering — Udaipur',
-    code: 'CTAE Udaipur',
-    photoUrl: 'https://images.unsplash.com/photo-1592280771190-3e2e4d571952?auto=format&fit=crop&w=1920&q=85',
+    name: 'Malaviya National Institute of Technology — Jaipur',
+    code: 'RJ-VPP-03',
+    photoUrl: '/campuses/mnit-jaipur.jpg',
     overlayGradient: 'from-slate-950 via-slate-950/80 to-slate-900/60',
     campusData: CAMPUS_LIST[2],
+  },
+  {
+    name: 'MBM University — Jodhpur',
+    code: 'RJ-VPP-04',
+    photoUrl: '/campuses/mbm-jodhpur.jpg',
+    overlayGradient: 'from-slate-950 via-slate-950/85 to-slate-900/65',
+    campusData: CAMPUS_LIST[3],
+  },
+  {
+    name: 'College of Technology & Agricultural Engineering — Udaipur',
+    code: 'RJ-VPP-05',
+    photoUrl: '/campuses/ctae-udaipur.png',
+    overlayGradient: 'from-slate-950 via-slate-950/80 to-slate-900/60',
+    campusData: CAMPUS_LIST[4],
   },
 ];
 
@@ -100,20 +114,12 @@ export const Landing: React.FC<LandingProps> = ({
     },
   ];
 
-  const pilotCampuses = [
-    {
-      ...CAMPUS_LIST[0],
-      photoUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-      ...CAMPUS_LIST[1],
-      photoUrl: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-      ...CAMPUS_LIST[2],
-      photoUrl: 'https://images.unsplash.com/photo-1592280771190-3e2e4d571952?auto=format&fit=crop&w=800&q=80',
-    },
-  ];
+  // Authoritative pilot campuses derived dynamically from CAMPUS_LIST
+  // Displays ALL pilot VPPs with verified authentic institutional imagery
+  const pilotCampuses = CAMPUS_LIST.map((campus) => ({
+    ...campus,
+    photoUrl: campus.imageUrl || `/campuses/${campus.id}.jpg`,
+  }));
 
   return (
     <div className="w-full flex flex-col min-h-screen">

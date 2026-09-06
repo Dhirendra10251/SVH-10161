@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CampusProfile, MetricData, RecommendationItem } from '../types';
 import { getCampusAuditReport } from '../data/campusAuditData';
 import { AuditCertificateModal } from './AuditCertificateModal';
+import { downloadCampusAuditReport } from '../utils/generateAuditPdf';
 import {
   FileText,
   Download,
@@ -17,6 +18,7 @@ import {
   Share2,
   AlertCircle,
   HelpCircle,
+  Loader2,
 } from 'lucide-react';
 
 interface ReportsViewProps {
@@ -36,9 +38,34 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
 }) => {
   const [reportPeriod, setReportPeriod] = useState<'current_month' | 'quarter' | 'year'>('current_month');
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
 
   // Dynamic audit report derived strictly from selected campus (single source of truth)
   const report = getCampusAuditReport(campus);
+
+  const handleDownloadReport = async () => {
+    if (isDownloading) return;
+    setIsDownloading(true);
+    setDownloadError(null);
+    setDownloadSuccess(false);
+
+    try {
+      await downloadCampusAuditReport({
+        campus,
+        metrics,
+        recommendations,
+      });
+      setDownloadSuccess(true);
+      setTimeout(() => setDownloadSuccess(false), 3000);
+    } catch (err) {
+      console.error('Failed to generate campus audit report:', err);
+      setDownloadError('Unable to generate report. Please try again.');
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   const handlePrintCertificate = () => {
     setIsCertificateModalOpen(true);
@@ -79,18 +106,69 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
         {/* Audit Actions */}
         <div className="flex items-center gap-2">
           <button
-            onClick={onOpenAuditModal}
-            className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer shadow-xs ${
-              isDarkMode
+            id="download-audit-report-btn"
+            onClick={handleDownloadReport}
+            disabled={isDownloading}
+            className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer shadow-xs ${
+              isDownloading
+                ? 'opacity-75 cursor-not-allowed bg-slate-700 text-slate-300'
+                : downloadSuccess
+                ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                : isDarkMode
                 ? 'bg-amber-500 hover:bg-amber-400 text-slate-950'
                 : 'bg-blue-700 hover:bg-blue-800 text-white'
             }`}
+            title={`Download official audit report PDF for ${campus.name}`}
           >
-            <Download className="w-3.5 h-3.5" />
-            <span>Generate Executive PDF</span>
+            {isDownloading ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Generating report...</span>
+              </>
+            ) : downloadSuccess ? (
+              <>
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Downloaded PDF</span>
+              </>
+            ) : (
+              <>
+                <Download className="w-3.5 h-3.5" />
+                <span>Download Report (PDF)</span>
+              </>
+            )}
+          </button>
+
+          <button
+            id="preview-audit-report-btn"
+            onClick={onOpenAuditModal}
+            className={`inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border transition-colors cursor-pointer ${
+              isDarkMode
+                ? 'bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-700'
+                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-300 shadow-2xs'
+            }`}
+            title="Preview executive audit summary"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Executive Preview</span>
           </button>
         </div>
       </div>
+
+      {/* Download Error Alert if any */}
+      {downloadError && (
+        <div className="p-3 rounded-xl border border-red-300 bg-red-50 dark:bg-red-950/30 dark:border-red-800 text-red-700 dark:text-red-300 text-xs flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <span>{downloadError}</span>
+          </div>
+          <button
+            onClick={() => setDownloadError(null)}
+            className="text-[11px] font-bold underline hover:no-underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
 
       {/* Primary 5 Metrics (Dynamically bound to selected campus audit data) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
