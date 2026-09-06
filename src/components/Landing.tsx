@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { CampusProfile } from '../types';
 import { CAMPUS_LIST } from '../data/mockData';
 import { ProductExplainerVideo } from './ProductExplainerVideo';
+import { RajasthanBrandingLogo } from './RajasthanBrandingLogo';
+import { UrjaSetuBrandWordmark } from './UrjaSetuBrandWordmark';
 import {
   ArrowRight,
   Network,
@@ -135,20 +137,16 @@ export const Landing: React.FC<LandingProps> = ({
         <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           {/* Brand Logo & Wordmark */}
           <div className="flex items-center gap-3">
-            <div
-              className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
-                isDarkMode
-                  ? 'bg-amber-500/10 border border-amber-500/30 text-amber-400'
-                  : 'bg-blue-50 border border-blue-200 text-blue-700'
-              }`}
-            >
-              <Zap className="w-5 h-5 stroke-[2.2]" />
-            </div>
+            <RajasthanBrandingLogo
+              variant="icon"
+              isDarkMode={isDarkMode}
+            />
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className={`text-base sm:text-lg font-bold tracking-tight ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>
-                  UrjaSetu
-                </span>
+                <UrjaSetuBrandWordmark
+                  size="header"
+                  isDarkMode={isDarkMode}
+                />
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border uppercase tracking-wider ${
                   isDarkMode ? 'bg-amber-500/10 text-amber-300 border-amber-500/30' : 'bg-blue-50 text-blue-800 border-blue-200'
                 }`}>
@@ -275,15 +273,29 @@ export const Landing: React.FC<LandingProps> = ({
           {/* Hero Content Container */}
           <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
             <div className="max-w-3xl space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-900/80 border border-blue-400/40 text-blue-100 text-xs font-semibold backdrop-blur-md shadow-sm">
-                <Zap className="w-3.5 h-3.5 text-blue-300" />
-                <span>Virtual Power Plant Pilot • Government of Rajasthan</span>
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-900/80 border border-blue-400/40 text-blue-100 text-xs font-semibold backdrop-blur-md shadow-sm">
+                  <Zap className="w-3.5 h-3.5 text-blue-300" />
+                  <span>Virtual Power Plant Pilot • Government of Rajasthan</span>
+                </div>
               </div>
 
-              <div className="space-y-3">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans drop-shadow-md">
-                  UrjaSetu
-                </h1>
+              {/* Official Rajasthan-themed UrjaSetu Logo Integration */}
+              <div className="pt-1">
+                <RajasthanBrandingLogo
+                  variant="hero"
+                  isDarkMode={true}
+                />
+              </div>
+
+              <div className="space-y-4">
+                <h1 className="sr-only">UrjaSetu</h1>
+                <div className="pt-1">
+                  <UrjaSetuBrandWordmark
+                    size="hero"
+                    isDarkMode={true}
+                  />
+                </div>
                 <p className="text-lg sm:text-xl md:text-2xl font-medium text-slate-100 leading-relaxed max-w-2xl">
                   Making every campus's solar, wind, and battery power work together — automatically.
                 </p>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { CampusProfile, TabType } from '../types';
 import { CAMPUS_LIST } from '../data/mockData';
+import { RajasthanBrandingLogo } from './RajasthanBrandingLogo';
+import { UrjaSetuBrandWordmark } from './UrjaSetuBrandWordmark';
 import {
   Menu,
   Building2,
@@ -102,23 +104,17 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2.5 cursor-pointer group select-none"
             title="UrjaSetu Home • Return to Landing Page"
           >
-            <div
-              className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
-                isDarkMode
-                  ? 'bg-amber-500/10 border border-amber-500/30 text-amber-400'
-                  : 'bg-blue-50 border border-blue-200 text-blue-700'
-              }`}
-            >
-              <Zap className="w-5 h-5 stroke-[2.2]" />
-            </div>
+            <RajasthanBrandingLogo
+              variant="icon"
+              isDarkMode={isDarkMode}
+            />
 
             <div className="hidden sm:flex flex-col">
               <div className="flex items-center gap-2">
-                <span className={`text-base sm:text-lg font-bold tracking-tight ${
-                  isDarkMode ? 'text-slate-100 group-hover:text-amber-400' : 'text-slate-900 group-hover:text-blue-700'
-                }`}>
-                  UrjaSetu
-                </span>
+                <UrjaSetuBrandWordmark
+                  size="header"
+                  isDarkMode={isDarkMode}
+                />
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${
                   isDarkMode ? 'bg-amber-500/10 text-amber-300 border-amber-500/30' : 'bg-blue-100 text-blue-900 border-blue-300'
                 }`}>
@@ -129,6 +125,15 @@ export const Header: React.FC<HeaderProps> = ({
                 Campus Virtual Power Plant • DTE Rajasthan
               </span>
             </div>
+          </div>
+
+          {/* Rajasthan Government Authenticity Mark */}
+          <div className="hidden sm:flex items-center pl-1 sm:pl-2 border-l border-slate-200 dark:border-slate-800 shrink-0">
+            <RajasthanBrandingLogo
+              variant="header"
+              isDarkMode={isDarkMode}
+              onClick={onNavigateHome}
+            />
           </div>
 
           {/* Secondary UrjaSetu Home Action (Returns to Landing Page) */}
